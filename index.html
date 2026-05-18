@@ -12,28 +12,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
   <style>
     :root {
-      --black: #020304;
-      --ink: #07090c;
-      --carbon: #0b0f14;
-      --panel: rgba(255, 255, 255, 0.055);
-      --panel-strong: rgba(255, 255, 255, 0.085);
+      --black: #000000;
       --white: #ffffff;
-      --soft: #e8eef3;
-      --muted: #9aa6b2;
-      --faint: #66717d;
-      --line: rgba(255, 255, 255, 0.13);
-      --line-soft: rgba(255, 255, 255, 0.08);
-      --cyan: #65e4ff;
-      --blue: #4f8cff;
-      --green: #8fffd0;
-      --silver: #d9e2ea;
-      --max-width: 1200px;
+      --off-white: #f5f5f2;
+      --grey: #b8b8b8;
+      --dark-grey: #171717;
+      --line-light: rgba(255, 255, 255, 0.22);
+      --line-dark: rgba(0, 0, 0, 0.2);
+      --max-width: 1180px;
     }
 
     * {
@@ -48,27 +40,10 @@
 
     body {
       font-family: "Inter", sans-serif;
-      background:
-        radial-gradient(circle at 18% 8%, rgba(79, 140, 255, 0.18), transparent 26%),
-        radial-gradient(circle at 85% 12%, rgba(101, 228, 255, 0.15), transparent 28%),
-        linear-gradient(180deg, #020304 0%, #07090c 42%, #020304 100%);
+      background: var(--black);
       color: var(--white);
-      line-height: 1.6;
+      line-height: 1.55;
       text-rendering: optimizeLegibility;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-      background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.15));
-      z-index: -1;
     }
 
     a {
@@ -86,13 +61,30 @@
       margin: 0 auto;
     }
 
+    .display-font,
+    h1,
+    h2,
+    h3,
+    .nav-links,
+    .brand-text,
+    .eyebrow,
+    .btn,
+    .section-number,
+    .tag,
+    .stat strong,
+    .coming-soon-text {
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 0.08em;
+      font-weight: 400;
+    }
+
     .nav {
       position: fixed;
       inset: 0 0 auto 0;
+      width: 100%;
       z-index: 100;
-      background: rgba(2, 3, 4, 0.72);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line-soft);
+      background: rgba(0, 0, 0, 0.92);
+      border-bottom: 1px solid var(--line-light);
     }
 
     .nav-inner {
@@ -106,128 +98,107 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.76rem;
-      white-space: nowrap;
+      gap: 16px;
     }
 
     .brand img {
-      width: 46px;
-      height: 46px;
+      width: 52px;
+      height: 52px;
       object-fit: contain;
+    }
+
+    .brand-text {
+      font-size: 1.25rem;
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .brand-text small {
+      display: block;
+      font-family: "Inter", sans-serif;
+      font-size: 0.48rem;
+      letter-spacing: 0.16em;
+      margin-top: 5px;
+      color: var(--grey);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
-      color: var(--muted);
-      font-size: 0.74rem;
+      gap: 34px;
+      font-size: 0.95rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 800;
     }
 
     .nav-links a {
-      transition: 0.2s ease;
-    }
-
-    .nav-links a:hover {
       color: var(--white);
+      opacity: 0.78;
+      transition: opacity 0.2s ease;
+      position: relative;
     }
 
-    .nav-cta {
-      border: 1px solid rgba(101, 228, 255, 0.5);
-      color: var(--white) !important;
-      padding: 11px 16px;
-      background: linear-gradient(135deg, rgba(101, 228, 255, 0.16), rgba(79, 140, 255, 0.14));
-      box-shadow: 0 0 34px rgba(101, 228, 255, 0.08);
+    .nav-links a:hover,
+    .nav-links a.active {
+      opacity: 1;
+    }
+
+    .nav-links a.active::after,
+    .nav-links a:hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      height: 2px;
+      background: var(--white);
     }
 
     .hero {
       min-height: 100vh;
       display: grid;
       align-items: center;
-      padding: 136px 0 82px;
-      border-bottom: 1px solid var(--line-soft);
-      position: relative;
+      padding: 140px 0 76px;
+      border-bottom: 1px solid var(--line-light);
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+        #000000;
+      background-size: 64px 64px;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      right: -12%;
-      top: 22%;
-      width: 520px;
-      height: 520px;
-      border: 1px solid rgba(101, 228, 255, 0.13);
-      transform: rotate(18deg);
-      pointer-events: none;
-    }
-
-    .hero-layout {
+    .hero-grid {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 74px;
+      grid-template-columns: 0.94fr 1.06fr;
+      gap: 72px;
       align-items: center;
-      position: relative;
-      z-index: 2;
     }
 
     .hero-logo {
-      width: clamp(180px, 22vw, 275px);
+      width: min(360px, 88%);
       margin-bottom: 34px;
-      filter: drop-shadow(0 0 28px rgba(101, 228, 255, 0.12));
     }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--green);
+      display: inline-block;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.72rem;
-      font-weight: 900;
-      margin-bottom: 22px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      box-shadow: 0 0 18px rgba(143, 255, 208, 0.7);
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-family: "Space Grotesk", sans-serif;
-      letter-spacing: -0.055em;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--white);
     }
 
     h1 {
-      font-size: clamp(3.6rem, 8vw, 8.1rem);
-      line-height: 0.9;
-      max-width: 900px;
+      text-transform: uppercase;
+      font-size: clamp(3.4rem, 7vw, 7.4rem);
+      line-height: 0.88;
+      max-width: 760px;
       margin-bottom: 28px;
     }
 
-    .gradient-text {
-      background: linear-gradient(90deg, #ffffff, #9defff 42%, #8fffd0 82%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 690px;
-      color: var(--silver);
-      font-size: 1.08rem;
+    .hero-copy p {
+      max-width: 610px;
+      color: #ededed;
+      font-size: 1.02rem;
       margin-bottom: 34px;
     }
 
@@ -241,501 +212,388 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 18px;
       min-height: 52px;
-      padding: 14px 24px;
-      border: 1px solid var(--line);
+      padding: 14px 28px;
+      border: 1px solid var(--white);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.72rem;
-      font-weight: 900;
-      transition: 0.24s ease;
-      cursor: pointer;
+      font-size: 0.98rem;
+      background: transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn::after {
+      content: "→";
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-      color: #020304;
-      border-color: transparent;
-      box-shadow: 0 18px 55px rgba(79, 140, 255, 0.24);
+      background: var(--white);
+      color: var(--black);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 22px 65px rgba(101, 228, 255, 0.28);
+      background: transparent;
+      color: var(--white);
     }
 
     .btn-secondary:hover {
-      border-color: rgba(101, 228, 255, 0.65);
-      color: var(--cyan);
+      background: var(--white);
+      color: var(--black);
     }
 
-    .jurisdiction-card {
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.03)),
-        radial-gradient(circle at 50% 28%, rgba(101, 228, 255, 0.15), transparent 42%);
-      padding: 32px;
-      min-height: 610px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    .jurisdiction-panel {
+      border-left: 1px solid var(--line-light);
+      padding-left: 58px;
     }
 
-    .jurisdiction-card::before {
-      content: "AML/CFT • GOVERNANCE • RISK";
-      position: absolute;
-      top: 20px;
-      right: -72px;
-      transform: rotate(90deg);
-      color: rgba(255, 255, 255, 0.16);
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      font-weight: 900;
-    }
-
-    .terminal-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line-soft);
-      color: var(--muted);
+    .panel-title {
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 0.68rem;
-      font-weight: 900;
+      font-size: 1.45rem;
+      margin-bottom: 36px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--white);
+      width: fit-content;
     }
 
-    .status {
-      color: var(--green);
-    }
-
-    .map-wrap {
-      min-height: 348px;
+    .map-box {
+      position: relative;
+      min-height: 410px;
       display: grid;
       place-items: center;
-      position: relative;
-      margin: 28px 0;
-    }
-
-    .map-wrap::before,
-    .map-wrap::after {
-      content: "";
-      position: absolute;
-      border: 1px solid rgba(101, 228, 255, 0.13);
-      inset: 18px;
-    }
-
-    .map-wrap::after {
-      inset: 56px;
-      border-color: rgba(143, 255, 208, 0.11);
+      margin-bottom: 24px;
     }
 
     .mauritius-map {
-      width: min(82%, 360px);
-      opacity: 0.96;
-      filter: grayscale(100%) contrast(1.15) drop-shadow(0 0 28px rgba(101, 228, 255, 0.18));
-      position: relative;
-      z-index: 2;
+      width: min(470px, 100%);
+      filter: grayscale(100%) contrast(1.15);
     }
 
-    .pulse-dot {
+    .map-marker {
       position: absolute;
-      width: 12px;
-      height: 12px;
-      background: var(--green);
-      box-shadow: 0 0 22px rgba(143, 255, 208, 0.75);
-      left: 50%;
-      top: 46%;
-      z-index: 3;
+      left: 32%;
+      top: 52%;
+      width: 18px;
+      height: 18px;
+      background: var(--black);
+      border: 4px solid var(--white);
+      outline: 1px solid var(--black);
     }
 
-    .jurisdiction-card h3 {
-      font-size: 2.1rem;
-      margin-bottom: 12px;
-    }
-
-    .jurisdiction-card p {
-      color: var(--silver);
-      font-size: 0.95rem;
-    }
-
-    .metric-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--line-soft);
-      border-left: 1px solid var(--line-soft);
-      margin-top: 26px;
-    }
-
-    .metric {
-      padding: 18px;
-      border-right: 1px solid var(--line-soft);
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .metric strong {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 4px;
-    }
-
-    .metric span {
-      color: var(--muted);
-      font-size: 0.66rem;
+    .map-label {
+      position: absolute;
+      left: 5%;
+      top: 45%;
       text-transform: uppercase;
-      letter-spacing: 0.11em;
-      font-weight: 800;
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 0.08em;
+      font-size: 1.3rem;
+    }
+
+    .map-label::after {
+      content: "";
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      width: 90px;
+      height: 1px;
+      background: var(--white);
+      margin-left: 12px;
+    }
+
+    .jurisdiction-panel p {
+      max-width: 560px;
+      color: #ededed;
+      font-size: 1rem;
     }
 
     section {
-      padding: 112px 0;
-      border-bottom: 1px solid var(--line-soft);
+      padding: 92px 0;
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    .section-light {
+      background: var(--off-white);
+      color: var(--black);
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .section-dark {
+      background: var(--black);
+      color: var(--white);
     }
 
     .section-header {
       display: grid;
-      grid-template-columns: 0.72fr 1.28fr;
-      gap: 62px;
-      margin-bottom: 58px;
+      grid-template-columns: 0.45fr 1.55fr;
+      gap: 58px;
+      margin-bottom: 52px;
     }
 
     .section-number {
-      color: var(--faint);
-      font-weight: 900;
-      letter-spacing: 0.17em;
       text-transform: uppercase;
-      font-size: 0.72rem;
+      font-size: 1.05rem;
+      color: inherit;
+      opacity: 0.72;
     }
 
     h2 {
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      line-height: 0.96;
-      max-width: 900px;
+      text-transform: uppercase;
+      font-size: clamp(2.6rem, 5vw, 5.2rem);
+      line-height: 0.92;
+      max-width: 920px;
     }
 
     .lead {
-      color: var(--muted);
-      font-size: 1.04rem;
-      max-width: 790px;
+      max-width: 780px;
       margin-top: 24px;
+      color: inherit;
+      opacity: 0.72;
+      font-size: 1.02rem;
     }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--line-soft);
-      border-left: 1px solid var(--line-soft);
-    }
-
-    .panel {
-      padding: 34px;
-      min-height: 305px;
-      border-right: 1px solid var(--line-soft);
-      border-bottom: 1px solid var(--line-soft);
-      background: rgba(255, 255, 255, 0.035);
-      transition: 0.25s ease;
-    }
-
-    .panel:hover {
-      background: rgba(255, 255, 255, 0.065);
-      transform: translateY(-3px);
-    }
-
-    .panel .tag {
-      display: inline-block;
-      margin-bottom: 54px;
-      color: var(--cyan);
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-weight: 900;
-    }
-
-    .panel h3 {
-      font-size: 1.38rem;
-      margin-bottom: 15px;
-    }
-
-    .panel p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .intelligence-band {
+    .intro-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--line-soft);
-      background: linear-gradient(135deg, rgba(101, 228, 255, 0.07), rgba(79, 140, 255, 0.035));
+      border-top: 1px solid var(--line-dark);
+      border-left: 1px solid var(--line-dark);
     }
 
-    .intel-cell {
-      padding: 28px;
-      border-right: 1px solid var(--line-soft);
+    .intro-card {
+      min-height: 245px;
+      padding: 32px 26px;
+      border-right: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+      text-align: center;
     }
 
-    .intel-cell:last-child {
-      border-right: 0;
-    }
-
-    .intel-cell strong {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 2.2rem;
-      letter-spacing: -0.06em;
-      margin-bottom: 8px;
-    }
-
-    .intel-cell span {
-      color: var(--muted);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 900;
-    }
-
-    .featured {
+    .icon-line {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 28px;
+      border: 2px solid currentColor;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      border: 1px solid var(--line-soft);
-      background: rgba(255, 255, 255, 0.035);
-      overflow: hidden;
+      place-items: center;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 1.25rem;
     }
 
-    .featured-copy {
-      padding: 58px;
+    .intro-card h3 {
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
     }
 
-    .featured-copy h3 {
-      font-size: clamp(2.1rem, 3.5vw, 3.7rem);
-      line-height: 0.96;
-      margin-bottom: 24px;
-    }
-
-    .featured-copy p {
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-
-    .feature-list {
-      list-style: none;
-      margin-top: 34px;
-      border-top: 1px solid var(--line-soft);
-    }
-
-    .feature-list li {
-      padding: 15px 0;
-      border-bottom: 1px solid var(--line-soft);
-      color: var(--soft);
-      font-size: 0.94rem;
-    }
-
-    .featured-visual {
-      min-height: 560px;
-      border-left: 1px solid var(--line-soft);
-      background:
-        linear-gradient(rgba(2, 3, 4, 0.1), rgba(2, 3, 4, 0.94)),
-        url("assets/featured.jpg") center/cover;
-      display: flex;
-      align-items: flex-end;
-      padding: 36px;
-      position: relative;
-    }
-
-    .featured-visual::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-      background-size: 38px 38px;
-    }
-
-    .visual-caption {
-      position: relative;
-      z-index: 2;
-      border-left: 3px solid var(--cyan);
-      padding-left: 18px;
-      color: var(--soft);
-      max-width: 390px;
+    .intro-card p {
       font-size: 0.9rem;
+      color: #222222;
     }
 
-    .projects {
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border-top: 1px solid var(--line-light);
+      border-left: 1px solid var(--line-light);
+    }
+
+    .focus-card {
+      min-height: 240px;
+      padding: 30px 22px;
+      border-right: 1px solid var(--line-light);
+      border-bottom: 1px solid var(--line-light);
+      text-align: center;
+    }
+
+    .focus-card h3 {
+      text-transform: uppercase;
+      font-size: 1.25rem;
+      margin-bottom: 14px;
+    }
+
+    .focus-card p {
+      color: #d8d8d8;
+      font-size: 0.84rem;
+    }
+
+    .coming-section {
+      display: grid;
+      grid-template-columns: 0.42fr 1.58fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .coming-box {
+      min-height: 230px;
+      border: 2px solid var(--black);
+      display: grid;
+      place-items: center;
+      background: var(--off-white);
+      color: var(--black);
+    }
+
+    .section-dark .coming-box {
+      border-color: var(--white);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .coming-soon-text {
+      text-transform: uppercase;
+      font-size: 1.55rem;
+      text-align: center;
+    }
+
+    .coming-soon-text span {
+      display: block;
+      font-family: "Inter", sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      border-top: 1px solid var(--line-dark);
+      border-left: 1px solid var(--line-dark);
     }
 
     .project-card {
-      border: 1px solid var(--line-soft);
-      padding: 36px;
-      background: rgba(255, 255, 255, 0.04);
-      min-height: 285px;
-      transition: 0.25s ease;
+      min-height: 270px;
+      padding: 34px;
+      border-right: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
     }
 
-    .project-card:hover {
-      border-color: rgba(101, 228, 255, 0.36);
-      background: rgba(255, 255, 255, 0.065);
-    }
-
-    .project-card span {
-      color: var(--green);
-      font-size: 0.68rem;
+    .project-card .tag {
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-weight: 900;
+      font-size: 1rem;
+      opacity: 0.72;
     }
 
     .project-card h3 {
-      margin: 52px 0 16px;
-      font-size: 1.46rem;
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      margin: 46px 0 14px;
     }
 
     .project-card p {
-      color: var(--muted);
-      font-size: 0.96rem;
+      color: #222222;
+      font-size: 0.94rem;
     }
 
-    .gallery {
+    .stats {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr 1fr;
-      gap: 18px;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line-light);
+      border-left: 1px solid var(--line-light);
     }
 
-    .photo-block {
-      min-height: 390px;
-      border: 1px solid var(--line-soft);
-      background: #10141a;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .photo-block img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: grayscale(100%) contrast(1.1);
-      opacity: 0.78;
-      transition: 0.35s ease;
-    }
-
-    .photo-block:hover img {
-      transform: scale(1.035);
-      opacity: 0.96;
-    }
-
-    .photo-label {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      padding: 18px;
-      background: linear-gradient(transparent, rgba(0, 0, 0, 0.92));
-      color: #ffffff;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-weight: 900;
-    }
-
-    .cta {
+    .stat {
+      min-height: 150px;
+      padding: 28px;
       text-align: center;
-      max-width: 910px;
-      margin: 0 auto;
-      border: 1px solid var(--line-soft);
-      padding: 66px 38px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(101, 228, 255, 0.15), transparent 42%),
-        rgba(255, 255, 255, 0.04);
+      border-right: 1px solid var(--line-light);
+      border-bottom: 1px solid var(--line-light);
     }
 
-    .cta .eyebrow {
-      justify-content: center;
+    .stat strong {
+      display: block;
+      font-size: 3.4rem;
+      line-height: 0.9;
+      margin-bottom: 14px;
     }
 
-    .cta h2 {
-      margin: 0 auto 26px;
+    .stat span {
+      display: block;
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
     }
 
-    .cta p {
-      color: var(--muted);
-      margin: 0 auto 34px;
-      font-size: 1.04rem;
-      max-width: 690px;
+    .stat p {
+      color: #d0d0d0;
+      font-size: 0.82rem;
     }
 
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 18px;
+    .cta-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .cta-row h2 {
+      max-width: 720px;
+    }
+
+    .cta-row p {
+      max-width: 600px;
+      color: #222222;
+      margin-top: 14px;
     }
 
     footer {
-      padding: 42px 0;
-      color: var(--muted);
+      background: var(--black);
+      color: var(--white);
+      padding: 34px 0;
     }
 
     .footer-inner {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 24px;
       flex-wrap: wrap;
       font-size: 0.82rem;
-      border-top: 1px solid var(--line-soft);
-      padding-top: 28px;
+      color: #d6d6d6;
     }
 
-    @media (max-width: 980px) {
+    .footer-brand {
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 1.3rem;
+      color: var(--white);
+    }
+
+    @media (max-width: 1060px) {
       .nav-links {
         display: none;
       }
 
-      .hero-layout,
+      .hero-grid,
       .section-header,
-      .featured,
-      .projects,
-      .gallery {
+      .coming-section,
+      .cta-row {
         grid-template-columns: 1fr;
       }
 
-      .grid-3,
-      .intelligence-band {
-        grid-template-columns: 1fr;
-      }
-
-      .intel-cell {
-        border-right: 0;
-        border-bottom: 1px solid var(--line-soft);
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .featured-visual {
+      .jurisdiction-panel {
         border-left: 0;
-        border-top: 1px solid var(--line-soft);
+        padding-left: 0;
+        border-top: 1px solid var(--line-light);
+        padding-top: 48px;
       }
 
-      section {
-        padding: 84px 0;
+      .intro-grid,
+      .focus-grid,
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 560px) {
-      .brand span {
-        font-size: 0.66rem;
-        letter-spacing: 0.06em;
+    @media (max-width: 680px) {
+      .brand-text {
+        font-size: 1rem;
       }
 
       .brand img {
-        width: 38px;
-        height: 38px;
+        width: 42px;
+        height: 42px;
       }
 
       .nav-inner {
@@ -743,28 +601,31 @@
       }
 
       .hero {
-        padding-top: 110px;
+        padding-top: 112px;
       }
 
-      .jurisdiction-card,
-      .featured-copy,
-      .project-card,
-      .panel,
-      .cta {
-        padding: 28px;
-      }
-
-      .metric-strip {
+      .intro-grid,
+      .focus-grid,
+      .stats,
+      .projects-grid {
         grid-template-columns: 1fr;
       }
 
-      .actions,
-      .social-links {
+      .actions {
         flex-direction: column;
       }
 
       .btn {
         width: 100%;
+      }
+
+      .map-label {
+        left: 0;
+        top: 16%;
+      }
+
+      .map-label::after {
+        width: 44px;
       }
     }
   </style>
@@ -775,198 +636,176 @@
     <div class="container nav-inner">
       <a href="#top" class="brand" aria-label="Financial Crime Society home">
         <img src="assets/logo.png" alt="Financial Crime Society logo" />
-        <span>Financial Crime Society</span>
+        <span class="brand-text">
+          Financial<br />Crime Society
+          <small>Middlesex University Mauritius</small>
+        </span>
       </a>
 
       <div class="nav-links">
+        <a href="#top" class="active">Home</a>
         <a href="#about">About</a>
-        <a href="#work">What We Do</a>
-        <a href="#featured">Featured</a>
+        <a href="#focus">Focus Areas</a>
+        <a href="#events">Events</a>
         <a href="#projects">Projects</a>
-        <a href="#proof">Proof</a>
-        <a href="#join" class="nav-cta">Join</a>
+        <a href="#membership">Membership</a>
       </div>
     </div>
   </nav>
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-layout">
-        <div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
           <img src="assets/logo.png" alt="Financial Crime Society logo" class="hero-logo" />
-          <div class="eyebrow">Middlesex University Mauritius</div>
-          <h1>Financial Crime <span class="gradient-text">Society.</span></h1>
+          <h1>Building a community. Combating financial crime.</h1>
           <p>
-            A student-led intelligence platform exploring AML/CFT, fraud, sanctions,
-            compliance, governance, and financial crime risk from Mauritius as a jurisdictional
-            and regional financial services centre.
+            A student-led society exploring AML/CFT, compliance, fraud, sanctions,
+            governance, and financial crime risk through knowledge, collaboration,
+            and real-world professional exposure.
           </p>
 
           <div class="actions">
-            <a href="#join" class="btn btn-primary">Become a Member</a>
-            <a href="#projects" class="btn btn-secondary">View Projects</a>
+            <a href="#membership" class="btn btn-primary">Join the Society</a>
+            <a href="#about" class="btn btn-secondary">Learn More</a>
           </div>
         </div>
 
-        <aside class="jurisdiction-card" aria-label="Mauritius jurisdiction focus">
-          <div class="terminal-bar">
-            <span>Jurisdiction Monitor</span>
-            <span class="status">Active</span>
-          </div>
-
-          <div class="map-wrap">
+        <aside class="jurisdiction-panel" aria-label="Mauritius jurisdiction section">
+          <h2 class="panel-title">Our Jurisdiction</h2>
+          <div class="map-box">
+            <span class="map-label">Mauritius</span>
+            <span class="map-marker" aria-hidden="true"></span>
             <img src="assets/mauritius-map.png" alt="Map of Mauritius" class="mauritius-map" />
-            <span class="pulse-dot" aria-hidden="true"></span>
           </div>
-
-          <h3>Mauritius Risk Lens</h3>
           <p>
-            Mauritius provides a strong context for applied learning in AML/CFT, governance,
-            cross-border finance, regulatory expectations, and institutional risk culture.
+            Mauritius gives the society a strong jurisdictional lens to explore financial crime,
+            AML/CFT regulation, governance, transparency, cross-border finance, and institutional risk.
           </p>
-
-          <div class="metric-strip">
-            <div class="metric">
-              <strong>AML</strong>
-              <span>Core Focus</span>
-            </div>
-            <div class="metric">
-              <strong>Gov</strong>
-              <span>Risk Culture</span>
-            </div>
-            <div class="metric">
-              <strong>2026</strong>
-              <span>Founded</span>
-            </div>
-          </div>
         </aside>
       </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="section-light">
       <div class="container">
-        <div class="section-header">
-          <div class="section-number">01 / About</div>
-          <div>
-            <h2>Built for students who want to understand risk beyond the textbook.</h2>
-            <p class="lead">
-              The Financial Crime Society creates a focused space for students to understand how
-              financial crime operates in real environments — from money laundering and fraud to
-              governance failures, sanctions exposure, and regulatory expectations.
-            </p>
-          </div>
-        </div>
-
-        <div class="intelligence-band">
-          <div class="intel-cell">
-            <strong>AML</strong>
-            <span>Anti-Money Laundering</span>
-          </div>
-          <div class="intel-cell">
-            <strong>CFT</strong>
-            <span>Counter-Terrorist Financing</span>
-          </div>
-          <div class="intel-cell">
-            <strong>KYC</strong>
-            <span>Client Risk & Due Diligence</span>
-          </div>
-          <div class="intel-cell">
-            <strong>GRC</strong>
-            <span>Governance, Risk & Compliance</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="work">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-number">02 / What We Do</div>
-          <div>
-            <h2>Applied learning, professional exposure, and structured discussion.</h2>
-            <p class="lead">
-              The society connects academic learning with practical understanding through case-based
-              sessions, research briefings, campus engagement, and professional conversations.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <article class="panel">
-            <span class="tag">Research</span>
-            <h3>Financial Crime Intelligence</h3>
+        <div class="intro-grid">
+          <article class="intro-card">
+            <div class="icon-line">01</div>
+            <h3>Our Mission</h3>
             <p>
-              We analyse AML/CFT themes, fraud patterns, sanctions risk, governance failures,
-              regulatory expectations, and emerging financial crime typologies.
+              To raise awareness and build student capability in the fight against financial crime
+              through education, research, and practical exposure.
             </p>
           </article>
 
-          <article class="panel">
-            <span class="tag">Practice</span>
-            <h3>Case-Based Learning</h3>
+          <article class="intro-card">
+            <div class="icon-line">02</div>
+            <h3>Our Vision</h3>
             <p>
-              Members work through realistic scenarios involving onboarding, UBO structures,
-              transaction monitoring, red flags, escalation, and risk-based decision-making.
+              To become a leading student platform in Mauritius for advancing integrity,
+              compliance, governance, and financial crime leadership.
             </p>
           </article>
 
-          <article class="panel">
-            <span class="tag">Network</span>
-            <h3>Professional Exposure</h3>
+          <article class="intro-card">
+            <div class="icon-line">03</div>
+            <h3>Who We Are</h3>
             <p>
-              We aim to connect students with professionals across compliance, governance, audit,
-              risk advisory, fintech, law, and financial services.
+              A community of students interested in compliance, risk management, law,
+              finance, governance, fintech, and ethical leadership.
+            </p>
+          </article>
+
+          <article class="intro-card">
+            <div class="icon-line">04</div>
+            <h3>What We Do</h3>
+            <p>
+              We host learning sessions, discussions, workshops, case studies, and initiatives
+              that connect theory with real-world practice.
             </p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="featured">
+    <section id="focus" class="section-dark">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">03 / Featured</div>
+          <div class="section-number">01 / Focus Areas</div>
           <div>
-            <h2>Featured initiative.</h2>
+            <h2>Structured learning across financial crime and compliance.</h2>
             <p class="lead">
-              A dedicated space for our key programme, event, simulation, or professional collaboration.
+              Our focus areas are designed to help students understand the core pillars of financial crime risk,
+              from prevention and detection to governance and professional decision-making.
             </p>
           </div>
         </div>
 
-        <div class="featured">
-          <div class="featured-copy">
-            <h3>Financial Crime & Governance Forum</h3>
-            <p>
-              A proposed discussion series exploring the connection between financial crime risk,
-              governance structures, compliance culture, and institutional accountability.
-            </p>
-            <p>
-              The aim is to help students understand that compliance does not operate in isolation.
-              It sits within wider governance systems, board oversight, risk culture, and ethical decision-making.
-            </p>
+        <div class="focus-grid">
+          <article class="focus-card">
+            <div class="icon-line">A</div>
+            <h3>AML / CFT</h3>
+            <p>Understanding frameworks used to prevent money laundering and terrorist financing.</p>
+          </article>
 
-            <ul class="feature-list">
-              <li>AML/CFT and governance discussions</li>
-              <li>Professional speaker sessions</li>
-              <li>Student-led research briefings</li>
-              <li>Case study workshops</li>
-            </ul>
-          </div>
+          <article class="focus-card">
+            <div class="icon-line">B</div>
+            <h3>Compliance</h3>
+            <p>Promoting ethical conduct, regulatory awareness, and control-based thinking.</p>
+          </article>
 
-          <div class="featured-visual">
-            <div class="visual-caption">
-              Replace this with a real event, networking, or society image at assets/featured.jpg.
-            </div>
+          <article class="focus-card">
+            <div class="icon-line">C</div>
+            <h3>Fraud Prevention</h3>
+            <p>Studying fraud typologies, red flags, controls, and prevention strategies.</p>
+          </article>
+
+          <article class="focus-card">
+            <div class="icon-line">D</div>
+            <h3>Sanctions</h3>
+            <p>Understanding global sanctions, screening, exposure, and business impact.</p>
+          </article>
+
+          <article class="focus-card">
+            <div class="icon-line">E</div>
+            <h3>Governance</h3>
+            <p>Exploring accountability, transparency, oversight, and institutional culture.</p>
+          </article>
+
+          <article class="focus-card">
+            <div class="icon-line">F</div>
+            <h3>Risk Management</h3>
+            <p>Identifying, assessing, and managing financial crime risks effectively.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="section-light">
+      <div class="container coming-section">
+        <div>
+          <div class="section-number">02 / Events</div>
+          <h2>Upcoming events.</h2>
+          <p class="lead">
+            Workshops, speaker sessions, professional discussions, and campus activities will be published here.
+          </p>
+          <br />
+          <a href="#membership" class="btn btn-secondary">Stay Updated</a>
+        </div>
+
+        <div class="coming-box" aria-label="Events coming soon">
+          <div class="coming-soon-text">
+            <span>▦</span>
+            Coming Soon
           </div>
         </div>
       </div>
     </section>
 
-    <section id="projects">
+    <section id="projects" class="section-light">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">04 / Projects</div>
+          <div class="section-number">03 / Projects</div>
           <div>
             <h2>Projects with visible output.</h2>
             <p class="lead">
@@ -976,9 +815,9 @@
           </div>
         </div>
 
-        <div class="projects">
+        <div class="projects-grid">
           <article class="project-card">
-            <span>Project 001</span>
+            <span class="tag">Project 001</span>
             <h3>AML Case Study Workshops</h3>
             <p>
               Interactive sessions where members assess client risk, identify red flags,
@@ -987,7 +826,7 @@
           </article>
 
           <article class="project-card">
-            <span>Project 002</span>
+            <span class="tag">Project 002</span>
             <h3>Financial Crime Briefings</h3>
             <p>
               Short student-led briefings covering fraud, sanctions, cyber-enabled financial crime,
@@ -996,97 +835,103 @@
           </article>
 
           <article class="project-card">
-            <span>Project 003</span>
+            <span class="tag">Project 003</span>
             <h3>Professional Speaker Series</h3>
             <p>
               Discussions with professionals in compliance, governance, audit, law, risk advisory,
-              and financial services.
+              fintech, and financial services.
             </p>
           </article>
 
           <article class="project-card">
-            <span>Project 004</span>
-            <h3>Student Career Pathways</h3>
+            <span class="tag">Project 004</span>
+            <h3>Coming Soon</h3>
             <p>
-              Resources helping students understand careers in AML, KYC, compliance, governance,
-              fraud investigation, and risk consulting.
+              This space will be updated as the society develops new initiatives, collaborations,
+              workshops, and student-led outputs.
             </p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="proof">
+    <section class="section-dark">
       <div class="container">
-        <div class="section-header">
-          <div class="section-number">05 / Proof</div>
-          <div>
-            <h2>Evidence of activity.</h2>
-            <p class="lead">
-              Use this section to show photos from events, meetings, workshops, networking sessions,
-              and member activities. This is what gives the society credibility.
-            </p>
+        <div class="stats">
+          <div class="stat">
+            <strong>01</strong>
+            <span>Society</span>
+            <p>One mission to strengthen awareness around financial crime.</p>
           </div>
-        </div>
 
-        <div class="gallery">
-          <figure class="photo-block">
-            <img src="assets/proof-1.jpg" alt="Financial Crime Society networking activity" />
-            <figcaption class="photo-label">Networking Evening</figcaption>
-          </figure>
+          <div class="stat">
+            <strong>100+</strong>
+            <span>Members Goal</span>
+            <p>A growing community of driven students and future professionals.</p>
+          </div>
 
-          <figure class="photo-block">
-            <img src="assets/proof-2.jpg" alt="Financial Crime Society campus engagement" />
-            <figcaption class="photo-label">Campus Engagement</figcaption>
-          </figure>
+          <div class="stat">
+            <strong>06</strong>
+            <span>Focus Areas</span>
+            <p>Covering key pillars of financial crime and compliance.</p>
+          </div>
 
-          <figure class="photo-block">
-            <img src="assets/proof-3.jpg" alt="Financial Crime Society student discussion" />
-            <figcaption class="photo-label">Student Discussion</figcaption>
-          </figure>
+          <div class="stat">
+            <strong>∞</strong>
+            <span>Possibilities</span>
+            <p>Creating impact through knowledge, action, and collaboration.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="join">
-      <div class="container">
-        <div class="cta">
-          <div class="eyebrow">Membership</div>
-          <h2>Join the Financial Crime Society.</h2>
-          <p>
-            Open to students interested in financial crime, AML/CFT, governance, compliance,
-            fraud, fintech risk, and financial services careers.
+    <section id="proof" class="section-dark">
+      <div class="container coming-section">
+        <div>
+          <div class="section-number">04 / Proof</div>
+          <h2>Activity gallery.</h2>
+          <p class="lead">
+            This section will showcase society events, networking sessions, workshops,
+            member activities, and collaborations.
           </p>
+        </div>
 
-          <div class="actions" style="justify-content: center;">
-            <a
-              href="https://docs.google.com/forms/d/1xSGINuUrmCgM_YEobwA1UEYatkc3VDOORJRDE1AeaJo/edit"
-              class="btn btn-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Apply to Join
-            </a>
-            <a
-              href="https://www.linkedin.com/company/financial-crime-society/"
-              class="btn btn-secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn Page
-            </a>
+        <div class="coming-box" aria-label="Gallery coming soon">
+          <div class="coming-soon-text">
+            <span>□</span>
+            Coming Soon
           </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="social-links">
-            <a
-              href="https://www.instagram.com/fcs_mdxmru/"
-              class="btn btn-secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Instagram
-            </a>
-          </div>
+    <section id="membership" class="section-light">
+      <div class="container cta-row">
+        <div>
+          <h2>Be part of the movement.</h2>
+          <p>
+            Join a student community focused on financial crime awareness, compliance learning,
+            governance, and professional development.
+          </p>
+        </div>
+
+        <div class="actions">
+          <a
+            href="https://docs.google.com/forms/d/1xSGINuUrmCgM_YEobwA1UEYatkc3VDOORJRDE1AeaJo/edit"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Become a Member
+          </a>
+          <a
+            href="https://www.linkedin.com/company/financial-crime-society/"
+            class="btn btn-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
         </div>
       </div>
     </section>
@@ -1094,9 +939,9 @@
 
   <footer>
     <div class="container footer-inner">
-      <span>© 2026 Financial Crime Society</span>
+      <span class="footer-brand">Financial Crime Society</span>
+      <span>© 2026 Financial Crime Society. All rights reserved.</span>
       <span>Middlesex University Mauritius</span>
-      <span>Built for applied financial crime learning.</span>
     </div>
   </footer>
 </body>
