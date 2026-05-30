@@ -559,7 +559,36 @@
       font-size: 1.3rem;
       color: var(--white);
     }
+.event-card {
+  border: 2px solid var(--black);
+  background: var(--black);
+  padding: 10px;
+}
 
+.event-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.event-caption {
+  margin-top: 18px;
+  border-top: 1px solid var(--line-dark);
+  padding-top: 18px;
+}
+
+.event-caption h3 {
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.event-caption p {
+  color: #222222;
+  font-size: 0.95rem;
+  max-width: 620px;
+}
     @media (max-width: 1060px) {
       .nav-links {
         display: none;
@@ -793,15 +822,21 @@
           <a href="#membership" class="btn btn-secondary">Stay Updated</a>
         </div>
 
-        <div class="coming-box" aria-label="Events coming soon">
-          <div class="coming-soon-text">
-            <span>▦</span>
-            Coming Soon
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="event-card" aria-label="Upcoming WSO online event">
+  <img
+    src="assets/wso-event.png"
+    alt="Financial Crime Society x Wall Street Oasis exclusive online event poster"
+  />
 
+  <div class="event-caption">
+    <h3>Financial Crime Society x WSO</h3>
+    <p>
+      Exclusive online event on breaking into high finance, featuring career insights,
+      industry perspectives, and a live Q&A with Wall Street Oasis speakers.
+    </p>
+  </div>
+</div>
+        
     <section id="projects" class="section-light">
       <div class="container">
         <div class="section-header">
